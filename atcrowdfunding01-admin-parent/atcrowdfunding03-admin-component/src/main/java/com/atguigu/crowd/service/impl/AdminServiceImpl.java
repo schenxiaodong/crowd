@@ -43,15 +43,19 @@ public class AdminServiceImpl implements AdminService {
         String createTime = format.format(date);
         admin.setCreateTime(createTime);
 
-        // 执行保存
+        // 执行保存，如果账户被占用会抛出异常
         try {
             adminMapper.insert(admin);
         } catch (Exception e) {
 //            e.printStackTrace();
 //            logger.info("异常全类名=" + e.getClass().getName());
+            // 检测当前捕获的异常对象，如果是 DuplicateKeyException 类型说明是账号重复导致的
             if(e instanceof DuplicateKeyException) {
+                // 抛出自定义的 LoginAccountAlreadyInUseException 异常
                 throw new LoginAccountAlreadyInUseException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
             }
+            // 为了不掩盖问题，如果当前捕获到的不是 DuplicateKeyException 类型的异常，则把当前捕获到的异常对象继续向上抛出
+            throw e;
         }
     }
 

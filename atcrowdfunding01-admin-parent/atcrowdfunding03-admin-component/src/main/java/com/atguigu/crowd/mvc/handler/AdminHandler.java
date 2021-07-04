@@ -70,17 +70,22 @@ public class AdminHandler {
 
     @RequestMapping("/admin/get/page.html")
     private String getPageInfo(
+            // 注意：页面上有可能不提供关键词，要进行适配
             // 使用 @RequestParam 注解的defaultValue属性，指定默认值，在请求中没有携带参数时使用默认值
             // keyword 默认值使用空字符串，和SQL语句实现两种情况适配
             @RequestParam(value = "keyword", defaultValue = "") String keyword,
-            // pageNum 默认值为 1
+            // 浏览器未提供 pageNum 时，默认前往第一页
             @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
-            // pageSize 默认值为 5
+            // 浏览器未提供 pageSize 时，默认每页显示 5 条记录
             @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,
             ModelMap modelMap) {
-        // 调用Service方法获取PageInfo对象
+
+        // 调用Service方法获取PageInfo对象，查询得到分页数据
         PageInfo<Admin> pageInfo = adminService.getPageInfo(keyword, pageNum, pageSize);
+
+        // 将分页数据存入模型
         modelMap.addAttribute(CrowdConstant.ATTR_NAME_PAGE_INFO,pageInfo);
+        
         return "admin-page";
     }
 
@@ -92,6 +97,7 @@ public class AdminHandler {
 
         // 将登录成功返回的Admin对象存入Session域
         session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_ADMIN, admin);
+
         return "redirect:/admin/to/main/page.html";
     }
 

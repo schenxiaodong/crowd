@@ -30,6 +30,7 @@
                 <!-- key属性指定异常全类名 -->
                 <!-- 标签体中写对应的视图（这个值和上面的viewResolver拼前后缀得到具体的资源） -->
                 <prop key="java.lang.NullPointerException">system-error</prop>
+                <prop key="com.atguigu.crowd.exception.AccessForbiddenException">admin-login</prop>
             </props>
         </property>
     </bean>

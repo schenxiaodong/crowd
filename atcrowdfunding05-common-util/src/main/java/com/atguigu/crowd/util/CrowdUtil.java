@@ -55,13 +55,13 @@ public class CrowdUtil {
             byte[] input = source.getBytes();
 
             // 5.执行加密
-            byte[] outbut = messageDigest.digest(input);
+            byte[] output = messageDigest.digest(input);
 
             // 6.创建BigInteger对象
             int signum = 1;
-            BigInteger bigInteger = new BigInteger(signum, outbut);
+            BigInteger bigInteger = new BigInteger(signum, output);
 
-            // 7.按照16进制将bigInteger的值转换为字符串
+            // 7.按照16进制将bigInteger的值转换为字符串,并转为大写
             int radix = 16;
             String encoded = bigInteger.toString(radix).toUpperCase();
 

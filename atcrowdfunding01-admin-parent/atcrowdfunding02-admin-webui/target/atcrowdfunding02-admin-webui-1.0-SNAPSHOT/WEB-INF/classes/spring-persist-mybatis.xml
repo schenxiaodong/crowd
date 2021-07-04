@@ -34,9 +34,11 @@
                     <property name="properties">
                         <props>
                             <!-- 配置数据库方言，告诉PageHelper当前使用的数据库 -->
+                            <!-- 让 PageHelper 可以根据当前数据库生成对应的分页 SQL 语句 -->
                             <prop key="dialect">mysql</prop>
 
                             <!-- 配置页码的合理化修正，在1~合理数之间修正页码 -->
+                            <!-- 让 PageHelper 自动把浏览器传来的 PageNum 修正到 0~总页 数范围 -->
                             <prop key="reasonable">true</prop>
                         </props>
                     </property>

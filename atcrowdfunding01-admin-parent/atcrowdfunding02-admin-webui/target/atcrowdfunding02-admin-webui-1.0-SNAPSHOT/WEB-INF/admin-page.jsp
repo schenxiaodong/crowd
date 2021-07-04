@@ -29,7 +29,7 @@
             num_edge_entries: 3,            //边缘页数
             num_display_entries: 4,         //主体页数
             callback: pageSelectCallback,   //指定用户点击“翻页”的按钮时跳转的页面的回掉
-            items_per_page:${requestScope.pageInfo.pageSize}, //每页要显示的数据的数量
+            items_per_page: ${requestScope.pageInfo.pageSize}, //每页要显示的数据的数量
             // 当前页 pagination内部使用pageIndex来管理页码，pageIndex从0开始，pageNum从1开始，所以要-1
             current_page: ${requestScope.pageInfo.pageNum-1},
             prev_text: "上一页",    //“前一页”分页按钮上显示的文字
@@ -49,7 +49,7 @@
         // 跳转页面
         window.location.href = "admin/get/page.html?pageNum=" + pageNum + "&keyword=${param.keyword}";
 
-        // 由于每一个按钮都是超链接，所以在这个函数最后去洗超链接的默认行为
+        // 由于每一个按钮都是超链接，所以在这个函数最后去取消超链接的默认行为
         return false;
     }
 
